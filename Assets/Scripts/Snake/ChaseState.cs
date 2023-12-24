@@ -12,7 +12,8 @@ namespace Snake
 
         public void Enter(SnakeController snakeController)
         {
-            // 
+            snakeController.agent.speed = snakeController.chaseSpeed;
+            snakeController.bodyFollow.followSpeed = snakeController.bodyFollowChaseSpeed;
         }
 
         public void Execute(SnakeController snake)
@@ -44,7 +45,8 @@ namespace Snake
 
         public void Exit(SnakeController snake)
         {
-            // 
+            snake.agent.speed = snake.patrolSpeed;
+            snake.bodyFollow.followSpeed = snake.bodyFollowPatrolSpeed;
         }
     }
 }
