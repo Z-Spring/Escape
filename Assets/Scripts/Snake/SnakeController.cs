@@ -55,33 +55,25 @@ public class SnakeController : MonoBehaviour
 
     #endregion
 
-    #region Speed
+    #region snake Speed
 
-    [Space(10)] [Header("Speed")] public float bodyFollowSpeed = 2f;
-    [SerializeField] private float headMoveSpeed = 10f;
-    [SerializeField] private float snakeTurnSpeed = 0.1f;
+    [SerializeField] internal float chaseSpeed = 8f;
+    [SerializeField] internal float patrolSpeed = 4f;
+    [SerializeField] internal float bodyFollowPatrolSpeed = 7f;
+    [SerializeField] internal float bodyFollowChaseSpeed = 12f;
 
     #endregion
 
     private ISnakeState currentState;
     internal int currentPatrolPointIndex;
     private float eatTimer;
-
-    // private enum SnakeState
-    // {
-    //     Patrol,
-    //     Chase,
-    //     Attack,
-    //     GetFood,
-    // }
-    //
-    // private SnakeState snakeState;
+    internal BodyFollow bodyFollow;
 
     private void Start()
     {
         currentPatrolPointIndex = 0;
         waitText.text = "";
-
+        bodyFollow = GetComponentInChildren<BodyFollow>();
         SetSnakeState(PatrolState.Instance);
     }
 
@@ -100,7 +92,7 @@ public class SnakeController : MonoBehaviour
     }
 
 
-    private void Move()
+    /*private void Move()
     {
         float xMov = Input.GetAxis("Horizontal");
         float zMov = Input.GetAxis("Vertical");
@@ -121,26 +113,10 @@ public class SnakeController : MonoBehaviour
             body.rotation = Quaternion.Lerp(body.rotation, bodyFollowPoint.rotation,
                 bodyFollowSpeed * Time.deltaTime);
         }
-    }
+    }*/
 
     internal bool HasFoundPlayer()
     {
-        // float eachAngel = snakeLookAngle / rayCount;
-        // for (int i = 1; i <= rayCount; i++)
-        // {
-        //     Vector3 dir = Quaternion.Euler(0, -snakeLookAngle / 2 + i * eachAngel, 0) * head.forward;
-        //     // todo: 不能设置层级，否则射线会忽略其他碰撞体
-        //     if (Physics.Raycast(head.position, dir, out RaycastHit hit, scanPlayerRayDistance, playerLayer))
-        //     {
-        //         Debug.DrawRay(head.position, dir * 10f, Color.green);
-        //         return true;
-        //     }
-        //
-        //     Debug.DrawRay(head.position, dir * 10f, Color.red);
-        // }
-        //
-        // return false;
-
         float distance = Vector3.Distance(head.position, player.position);
         if (distance < scanPlayerDistance)
         {
