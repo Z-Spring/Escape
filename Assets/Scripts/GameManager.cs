@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("current gameState: " + gameState);
         switch (gameState)
         {
             case GameState.Start:

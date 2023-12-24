@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using UnityEngine.AI;
+﻿using UnityEngine.AI;
 
 namespace Snake
 {
@@ -23,20 +22,17 @@ namespace Snake
 
             if (agent.remainingDistance <= agent.stoppingDistance)
             {
-                Debug.Log("Reached Patrol Point");
                 snake.currentPatrolPointIndex = (currentPatrolPointIndex + 1) % snake.patrolPoints.Count;
             }
 
             if (snake.HasFoundPlayer())
             {
-                Debug.Log("Found Player");
                 snake.SetSnakeState(ChaseState.Instance);
                 return;
             }
 
             if (snake.HasFoundFood())
             {
-                Debug.Log("Found Food");
                 snake.SetSnakeState(GetFoodState.Instance);
             }
         }
